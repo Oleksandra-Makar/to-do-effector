@@ -1,18 +1,19 @@
-import { FormEvent, useCallback, useState } from 'react'
+import { FormEvent, useCallback } from 'react'
 import { Button, TextField } from '@mui/material'
+import { useStore } from 'effector-react'
+import $store, { setNewTodo, addTodo } from '../store/todoStore'
 
 const AddToDo = () => {
-    const [title, setTitle] = useState<string>('')
+    const { newTodoTitle } = useStore($store)
 
     const handleSubmit = useCallback(
         (event: FormEvent<EventTarget>) => {
             event.preventDefault()
-            if (title) {
-                console.log(title)
-                setTitle('')
+            if (newTodoTitle) {
+                addTodo()
             }
         },
-        [title]
+        [newTodoTitle]
     )
     return (
         <form onSubmit={handleSubmit}>
@@ -20,8 +21,8 @@ const AddToDo = () => {
                 variant="outlined"
                 label="To Do Item"
                 fullWidth
-                onChange={(e) => setTitle(e.target.value)}
-                value={title}
+                onChange={(e) => setNewTodo(e.target.value)}
+                value={newTodoTitle}
                 margin="normal"
             />
             <Button variant="contained" color="primary" fullWidth type="submit">

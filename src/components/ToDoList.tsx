@@ -1,9 +1,10 @@
 import { List } from '@mui/material'
 import ToDoItem from './ToDoItem'
-import { IToDo } from '../interfaces/Todo'
+import { useStore } from 'effector-react'
+import $store from '../store/todoStore'
 
 const ToDoList = () => {
-    const todos: IToDo[] = [{ id: '2', title: 'Task', completed: true }]
+    const { todos } = useStore($store)
 
     return (
         <List>

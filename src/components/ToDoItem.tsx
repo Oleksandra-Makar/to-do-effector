@@ -8,16 +8,17 @@ import {
     IconButton,
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
+import { deleteTodo, toggleTodoStatus } from '../store/todoStore'
 
 interface IToDoItemProps extends IToDo {}
 
 const ToDoItem: FC<IToDoItemProps> = ({ id, completed, title }) => {
     const handleChangeStatus = useCallback(() => {
-        console.log(id)
+        toggleTodoStatus(id)
     }, [id])
 
     const handleDelete = useCallback(() => {
-        console.log(id)
+        deleteTodo(id)
     }, [id])
 
     return (
